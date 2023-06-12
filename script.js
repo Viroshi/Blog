@@ -1,103 +1,66 @@
-//Booleanos universais
-let clique = false
+//Divs 
+    const container = document.getElementById("primario");
+    const containersec = document.getElementById("secundario");
+//Textos 
+    const textopri = document.getElementById("textoprimario");
+    const textosec = document.getElementById("textosecundario");
+//Var 
+    var local = [
+        textopri,
+        textosec
+    ]
+//Botões 
+    const sim = document.getElementById("yes");
+    const nao = document.getElementById("no");
+//Audio
+    const audio = document.getElementById("mysteryMan")
 
-//Textos
-const initial = document.getElementById("initial");
-const montain = document.getElementById("montain");
-const footer = document.querySelector(".footer");
+function loading() {
+    setTimeout(() => writer("M.Ebott é visto no horizonte...", local[0], 30),4000)
+    setTimeout(() => writer("Você quer escalar?", local[1], 30),6000)
+}
+loading()
 
-//Botões
-const buttons = document.querySelectorAll(".buttons");
-const yes = document.getElementById("yes");
-const no = document.getElementById("no");
-
-//Fundos
-const principal = document.querySelector(".principal")
-const background = document.querySelector(".container");
-const inicio = document.querySelector(".inicio");
-
-//Efeitos Sonoros
-const selectSound = document.getElementById("selectSound");
-const selectedSound = document.getElementById("selectedSound");
-const mystery = document.getElementById("mystery");
-
-//Arrays
-const texts = [initial, montain, yes, no];
-
-const msgs = [
-    "Clique em qualquer lugar para continuar",
-    "* Você avista o Monte Ebott, deseja escalar?",
-    "Sim",
-    "Não",
-];
-
-//setTimeOut
-setTimeout(() => type(0, 0), 3000);
-
-//Cria um efeito de menssagem digitada
-function type(m, e) {
-    for (let i = 0; i < msgs[m].length; i++) {
-        setTimeout(() => (texts[e].innerHTML += msgs[m][i]), 30 * i);
-    }
+function acessonegado() {
+    sim.classList.add("desativar")
+    nao.classList.add("desativar");
+    audio.play();
+    writer(".......", local[0], 1000)
+    writer("", local[1], 30)
+    setTimeout(() => alert("Acha mesmo que está no controle? Quer tentar a sorte?"), 7000)
+    setInterval(() => window.location = "MtEbott.html", 8000)
 }
 
-//Inicia a página após o clique
-function start() {
-    background.classList.add("active");
-    initial.classList.add("hidden");
-    setTimeout(() => type(1, 1), 3500);
-    setTimeout(() => type(2, 2), 5500);
-    setTimeout(() => type(3, 3), 6000);
-    setTimeout(() => footer.classList.add("active"), 6500);
-}
+function setBackground() {
+    let time = getTime()
 
-//Som ao passar o mouse por todos os botões interativos
-function over() {
-    selectSound.currentTime = 0;
-    selectSound.play();
-}
-
-function page(respost) {
-    switch (respost) {
-        //Som ao clicar no botão de sim
-        case 1:
-            selectedSound.currentTime = 0;
-            selectedSound.play();
-
-            nextPage();
-            break;
-        //Som ao clicar no botão de não
-        case 0:
-            mystery.play();
-            no.style.visibility = "hidden";
-            break;
-    }
-}
-
-//Que horas são?
-
-function time() {
-    var hour = new Date();
-    h = hour.getHours();
-
-    setBackground(h);
-}
-
-setInterval(() => time(), 1000);
-
-function setBackground(hours) {
-    if (hours > 6 && hours < 16) {
-        background.classList.add("day");
-        inicio.classList.add("day");
-    } else if (hours >= 16 && hours < 18) {
-        background.classList.add("afternoon");
-        inicio.classList.add("afternoon");
+    container.classList.add("ativar");
+    setTimeout(() => containersec.classList.add("ativar"), 1000)
+    
+    if (time > 6 || time < 16) {
+        container.style.backgroundColor = "#32b9ff"
+        containersec.style.backgroundImage = "url('img/Ebott.png')"
+    } else if (time > 16 || time < 18) {
+        container.style.backgroundColor = "#c08226"
+        containersec.style.backgroundImage = "url('img/EbottTarde.png')"
     } else {
-        principal.classList.add("night");
-        background.classList.add("night");
-        inicio.classList.add("night");
-        buttons.forEach((buttons) => {
-            buttons.classList.add("color");
-        });
+        container.style.backgroundColor = "#03151e"
+        containersec.style.backgroundImage = "url('img/EbottNoite.png')"
+        container.classList.add("noite");
+    }
+}
+
+setBackground()
+function getTime() {
+    var hour = new Date()
+    let h = hour.getHours()
+
+    return h
+}
+
+function writer(text,local, time) {
+    local.innerHTML = ""
+    for (let i = 0; i <text.length; i++) {
+        setTimeout(() => local.innerHTML += text[i], time * i)
     }
 }
