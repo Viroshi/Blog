@@ -1,176 +1,104 @@
+@charset "UTF-8";
 @font-face {
-    font-family: "determination";
+    font-family: 'Determination';
     src: url(Fontes/determinationmonoweb-webfont.ttf);
 }
 
-/*HTML*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "determination";
     overflow: hidden;
-    user-select: none;
+    font-family: 'Determination';
 }
-.principal.night {
-    color: white;
-}
-
-/*Div principal*/
 
 .container {
     position: absolute;
-    top: 100%;
     width: 100vw;
     height: 100vh;
-    background-size: cover;
-    transition: background 1s;
+    opacity: 0;
 }
 
-.container.active {
-    top: 0;
-    animation: Down 5s ease;
-}
-
-.container.day {
-    background-image: url(img/Ebott.png);
-}
-
-.container.afternoon {
-    background-image: url(img/EbottTarde.png);
-}
-
-.container.night {
-    background-image: url(img/EbottNoite.png);
-}
-
-@keyframes Down {
-    from {
-        transform: translateY(100%);
-    }
-
-    to {
-        transform: translateY(0);
-    }
-}
-
-/*Texto principal da div .container*/
-
-#montain {
-    position: relative;
-    top: 30%;
-    left: 23%;
-}
-
-/*Botões de sim e não*/
-
-button {
-    background-color: transparent;
-    width: 55px;
-    height: 35px;
-    font-size: 35px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    left: 35%;
-    top: 45%;
-}
-
-button.color {
+.container.noite {
     color: white;
 }
 
-button:hover {
-    color: yellow;
-}
-
-#no {
-    margin: 0 20%;
-}
-
-/*Div exibida no começo*/
-
-.inicio {
-    width: 100vw;
-    height: 100vh;
-    animation: entrada 4s ease;
-}
-
-.inicio.day {
-    background-color: #32b9ff;
-}
-
-.inicio.afternoon {
-    background-color: #c08226;
-}
-
-.inicio.night {
-    background-color: #03151e;
-}
-
-@keyframes entrada {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-/*Texto principal da div .inicio*/
-
-#initial {
-    position: relative;
-    margin-top: 20%;
-    display: flex;
-    justify-content: center;
-    animation: opacity 1s linear infinite;
-    animation-delay: 4.3s;
+.container.ativar {
     opacity: 1;
-    text-transform: uppercase;
-    text-align: start;
-}
-
-#initial.hidden {
-    visibility: hidden;
-}
-
-@keyframes opacity {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-/*Texto que fica abaixo do texto principal da div .container*/
-
-footer {
-    position: absolute;
-    top: 35%;
-    left: 30%;
-    visibility: hidden;
-}
-
-footer.active {
-    visibility: visible;
-    animation: fade-in 2s ease;
+    animation: fade-in 2s ease-in;
 }
 
 @keyframes fade-in {
     from {
         opacity: 0;
-    }
-
-    to {
+    } to {
         opacity: 1;
     }
+}
+
+.containersec {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 100%;
+    background-size: cover;
+}
+
+.containersec.ativar {
+    top: 0;
+    animation: up 3s ease-out;
+}
+
+@keyframes up {
+    from {
+        transform: translateY(100%);
+    } to {
+        transform: translateY(0);
+    }
+}
+
+.text-button {
+    position: absolute;
+    top: 25vh;
+}
+
+.text {
+    position: absolute;
+    left: 30vw;
+}
+
+.button {
+    position: relative;
+    margin: 150px;
+    left: 13vw;
+    opacity: 0;
+    animation: visibility 0.1s 7s forwards;
+}
+
+@keyframes visibility {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+a {
+    margin-left: 150px;
+    margin-right: 150px;
+    width: 60px;
+    height: 35px;
+    font-size: 30px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+a:hover {
+    color: yellow;
+}
+
+a.desativar {
+    visibility: hidden;
 }
